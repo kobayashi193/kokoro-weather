@@ -1,16 +1,131 @@
 <!doctype html>
-<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>こころ天気 — 共有設定</title>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>こころ天気 — 共有</title>
 <style>
-:root{--ink:#172E4B;--muted:#7C8794;--page:#F2F3F5;--line:#E8EAED;--cyan:#29C3DC;--yellow:#FFE45B;--blue:#214E95;--soft:#F5F6F7}*{box-sizing:border-box}body{margin:0;background:var(--page);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;font-size:14px;line-height:1.6}.app{max-width:850px;margin:0 auto;padding:30px 24px 56px}.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}.brand{font-size:20px;font-weight:900;letter-spacing:.04em;color:inherit;text-decoration:none}.nav{display:flex;gap:8px}.nav a{color:#7A8490;text-decoration:none;padding:8px 13px;border-radius:9px;font-size:13px;font-weight:700}.nav a.active{color:var(--ink);background:white}.card{background:#fff;border:1px solid #E9EAEC;border-radius:12px;padding:25px}.kicker{font-size:11px;letter-spacing:.12em;color:#9AA2AA;font-weight:800}.title{font-size:25px;margin:4px 0 2px;font-weight:900}.intro{font-size:13px;color:#7D8790;margin:0 0 22px}.privacy{display:flex;gap:10px;align-items:center;background:#F5F6F7;border-radius:10px;padding:12px 14px;color:#737D88;font-size:12px;margin-bottom:17px}.privacy-mark{width:8px;height:8px;border-radius:50%;background:#5BAEB9}.people{display:grid;gap:10px}.person{display:grid;grid-template-columns:42px minmax(120px,1fr) minmax(155px,auto) 34px;align-items:center;gap:12px;padding:13px;border:1px solid var(--line);border-radius:10px}.avatar{width:38px;height:38px;display:grid;place-items:center;background:#E8F5F6;border-radius:50%;font-weight:900;color:#286B79}.details strong{display:block;font-size:13px;font-weight:800}.details small{font-size:11px;color:#8B949D}.scope{display:flex;align-items:center;gap:8px;font-size:11px;color:#737D88}.scope select{font:inherit;color:#465769;background:#F1F2F3;border:0;border-radius:8px;padding:8px 10px;cursor:pointer}.remove{border:0;background:transparent;color:#9AA2AA;font-size:19px;cursor:pointer}.invite{display:block;margin-top:13px;padding:11px 14px;border:1px solid #DCE1E5;background:#fff;border-radius:9px;color:#657584;font:inherit;font-size:12px;font-weight:800;cursor:pointer}.help{font-size:11px;color:#87919B;margin:17px 0 0}.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#172E4B;color:white;padding:10px 16px;border-radius:9px;opacity:0;pointer-events:none;transition:.18s}.toast.show{opacity:1}.modal-bg{position:fixed;inset:0;background:#172E4B66;display:none;place-items:center;padding:18px}.modal-bg.show{display:grid}.modal{width:min(390px,100%);padding:23px;border-radius:12px;background:white}.modal h2{font-size:18px;margin:0 0 5px}.modal p{margin:0 0 15px;color:#7D8790;font-size:12px}.modal input{width:100%;border:1px solid var(--line);border-radius:8px;padding:11px;font:inherit}.actions{display:flex;justify-content:flex-end;gap:8px;margin-top:15px}.actions button{border:0;border-radius:8px;background:#F1F2F3;color:#526170;padding:9px 13px;font:inherit;font-size:12px;font-weight:800;cursor:pointer}.actions .primary{background:var(--yellow);color:var(--ink)}@media(max-width:620px){.app{padding:20px 14px}.top{align-items:flex-start}.nav a{padding:7px 8px;font-size:11px}.card{padding:18px}.person{grid-template-columns:38px minmax(85px,1fr) 34px;gap:8px}.scope{grid-column:2;grid-row:2}.remove{grid-column:3;grid-row:1}.avatar{grid-row:1/3}.title{font-size:22px}}
-.brand{font-family:"Hiragino Maru Gothic ProN","Hiragino Maru Gothic Pro","Yu Gothic",sans-serif;letter-spacing:.04em} .brand{-webkit-text-stroke:.65px currentColor}.nav a.active{background:#1749B4;color:#fff}.kicker{color:#168FA6}.privacy{background:#DDF6FA;color:#315568}.privacy-mark{background:#22B9F4}.person{border-color:#B8E8F0}.avatar{background:#22B9F4;color:#17324B}.scope select{background:#E6F6FA;color:#17324B}.invite{background:#FFE45B;border-color:#FFE45B;color:#172E4B}.invite:hover{filter:brightness(.98)}</style><style>.person{grid-template-columns:42px minmax(120px,1fr) minmax(155px,auto) 34px}.modal .scope{display:flex;justify-content:space-between;margin-top:10px}.modal .scope select{font:inherit;padding:8px;border:0;border-radius:8px;background:#E6F6FA}</style><style>
-.online-auth{display:flex;align-items:center;gap:18px;margin:-8px 0 18px;padding:13px 16px;border:1px solid #E5EAED;border-radius:11px;background:#fff}
-.online-auth-copy{display:grid;gap:2px;min-width:180px}.online-auth-copy strong{font-size:12px}.online-auth-copy span,#online-auth-message{color:#7C8794;font-size:11px}
-#online-login{display:flex;align-items:center;gap:8px;margin-left:auto}#online-login label{font-size:11px;color:#7C8794}#online-email{width:210px;padding:8px 10px;border:1px solid #DDE2E6;border-radius:8px;font:inherit;font-size:12px}
-#online-login button,#online-logout{border:0;border-radius:8px;padding:9px 12px;background:#FFE45B;color:#172E4B;font:inherit;font-size:11px;font-weight:800;cursor:pointer}
-#online-user{display:flex;align-items:center;gap:12px;margin-left:auto;font-size:12px}#online-auth-message{margin:0 0 0 auto}.online-auth [hidden]{display:none!important}
-@media(max-width:760px){.online-auth{align-items:flex-start;flex-direction:column;gap:8px}#online-login{margin:0;flex-wrap:wrap}#online-email{width:min(220px,60vw)}#online-user,#online-auth-message{margin:0}}
+:root{--ink:#172E4B;--muted:#7C8794;--page:#F2F3F5;--line:#E8EAED;--yellow:#FFE45B;--cyan:#22B9F4;--blue:#1749B4;--soft:#F5F6F7}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font:14px/1.6 -apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif}
+.app{max-width:1320px;margin:0 auto;padding:30px 24px 56px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:24px}
+.brand{font-family:"Hiragino Maru Gothic ProN","Hiragino Maru Gothic Pro","Yu Gothic",sans-serif;font-size:20px;font-weight:900;letter-spacing:.04em;color:inherit;text-decoration:none;-webkit-text-stroke:.65px currentColor}
+.nav{display:flex;gap:8px;flex-wrap:wrap}.nav a{padding:8px 13px;border-radius:9px;color:var(--muted);font-size:13px;font-weight:700;text-decoration:none}.nav a.active{background:var(--blue);color:white}
+.dashboard{display:grid;grid-template-columns:minmax(0,1.42fr) minmax(360px,.88fr);gap:20px;align-items:start}
+.card{min-width:0;padding:24px;background:#fff;border:1px solid var(--line);border-radius:14px}
+.kicker{color:#168FA6;font-size:11px;font-weight:800;letter-spacing:.12em}.title{margin:4px 0 2px;font-size:25px;font-weight:900}.intro{margin:0 0 20px;color:var(--muted);font-size:13px}
+.week-summary{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 16px;padding:12px 14px;border-radius:10px;background:#E6F8FC;color:#315568;font-size:12px}.week-summary strong{color:var(--ink);font-size:13px}.week-summary span{color:#6B8190}.week-controls{display:flex;align-items:center;gap:7px}.week-controls button{padding:6px 9px;border:1px solid #D4E8ED;border-radius:7px;background:#fff;color:#315568;font:inherit;font-size:11px;font-weight:700;cursor:pointer}.week-controls button:disabled{opacity:.42;cursor:default}
+.week-scroll{overflow-x:auto;padding-bottom:4px}.week-table{min-width:590px}.week-head,.week-row{display:grid;grid-template-columns:118px repeat(7,minmax(56px,1fr));align-items:center;gap:6px}.week-head{margin-bottom:7px}.day-label{text-align:center;color:#798593;font-size:10px;line-height:1.35}.day-label.today{color:#137F99;font-weight:800}.day-label span{display:block}.week-row{min-height:88px;margin-top:8px;padding:7px;border:1px solid var(--line);border-radius:11px;background:#fff}.person-label{display:flex;align-items:center;gap:9px;min-width:0;padding-left:3px}.avatar{display:grid;place-items:center;flex:none;width:36px;height:36px;border-radius:50%;background:#DDF6FA;color:#1A5367;font-weight:900}.avatar.self{background:#FFE45B;color:var(--ink)}.person-name{min-width:0}.person-name strong{display:block;overflow:hidden;font-size:12px;text-overflow:ellipsis;white-space:nowrap}.person-name small{display:block;color:#8A949E;font-size:10px}
+.weather-cell{display:grid;place-items:center;min-height:64px;border-radius:9px;background:#F6F7F8}.weather-cell.today{background:#E8F8FC}.weather-cell.weather-sunny{background:#2CC8E8}.weather-cell.weather-partly{background:#22B9F4}.weather-cell.weather-cloudy{background:#26BDF1}.weather-cell.weather-drizzle{background:#1749B4}.weather-cell.weather-storm{background:#064779}.weather-cell img{width:43px;height:43px;object-fit:contain}.weather-cell.empty{color:#B5BDC4;font-size:18px}.weather-parts{display:flex;align-items:center;justify-content:center;gap:0}.weather-parts img{width:32px;height:37px;margin:0 -3px}.week-legend{margin:13px 0 0;color:#89939D;font-size:11px}
+.settings-title{margin:4px 0 2px;font-size:22px;font-weight:900}.settings-intro{margin:0 0 17px;color:var(--muted);font-size:12px}.privacy{margin-bottom:16px;padding:12px 13px;border-radius:9px;background:#DDF6FA;color:#315568;font-size:11px}.people{display:grid;gap:9px}.person{display:grid;grid-template-columns:38px minmax(90px,1fr) 25px;align-items:center;gap:9px;padding:11px;border:1px solid #B8E8F0;border-radius:10px}.person .avatar{width:36px;height:36px;background:var(--cyan);color:#17324B}.details{min-width:0}.details strong{display:block;overflow:hidden;font-size:12px;text-overflow:ellipsis;white-space:nowrap}.details small{display:block;overflow:hidden;color:#8B949D;font-size:10px;text-overflow:ellipsis;white-space:nowrap}.scope{display:grid;gap:3px;color:#7A8490;font-size:10px}.scope select{max-width:132px;padding:7px 8px;border:0;border-radius:7px;background:#E6F6FA;color:#315568;font:inherit}.remove{border:0;background:transparent;color:#9AA2AA;font-size:19px;cursor:pointer}.invite{margin-top:12px;padding:10px 13px;border:0;border-radius:9px;background:var(--yellow);color:var(--ink);font:inherit;font-size:12px;font-weight:800;cursor:pointer}.help{margin:14px 0 0;color:#87919B;font-size:10px}
+.toast{position:fixed;bottom:24px;left:50%;z-index:10;transform:translateX(-50%);padding:10px 16px;border-radius:9px;background:var(--ink);color:white;opacity:0;pointer-events:none;transition:.18s}.toast.show{opacity:1}.modal-bg{position:fixed;inset:0;z-index:20;display:none;place-items:center;padding:18px;background:#172E4B66}.modal-bg.show{display:grid}.modal{width:min(390px,100%);padding:23px;border-radius:12px;background:#fff}.modal h2{margin:0 0 5px;font-size:18px}.modal p{margin:0 0 15px;color:var(--muted);font-size:12px}.modal input{width:100%;padding:11px;border:1px solid var(--line);border-radius:8px;font:inherit}.modal .scope{display:flex;align-items:center;justify-content:space-between;margin-top:12px;font-size:12px}.modal .scope select{font-size:12px}.actions{display:flex;justify-content:flex-end;gap:8px;margin-top:15px}.actions button{padding:9px 13px;border:0;border-radius:8px;background:#F1F2F3;color:#526170;font:inherit;font-size:12px;font-weight:800;cursor:pointer}.actions .primary{background:var(--yellow);color:var(--ink)}
+@media(max-width:900px){.dashboard{grid-template-columns:1fr}.settings-card{order:2}}
+@media(max-width:620px){.app{padding:20px 14px 40px}.top{align-items:flex-start;flex-direction:column;gap:10px;margin-bottom:17px}.nav{gap:2px}.nav a{padding:7px 8px;font-size:11px}.card{padding:18px}.title{font-size:22px}.week-summary{align-items:flex-start;flex-direction:column;gap:3px}.week-row{grid-template-columns:106px repeat(7,minmax(56px,1fr));min-height:78px}.week-table{min-width:568px}.weather-cell{min-height:56px}.weather-cell img{width:38px;height:38px}.weather-parts img{width:29px;height:34px}.person{grid-template-columns:36px minmax(72px,1fr) 22px;gap:6px;padding:9px}}
 </style>
-</head><body><main class="app"><header class="top"><a class="brand" href="index.html">こころ天気</a><nav class="nav"><a href="mood-weather-sharing.html">今日の記録</a><a href="mood-weather-history.html">過去の記録</a><a class="active" href="mood-weather-share.html">共有設定</a><a href="mood-weather-guide.html">使い方</a></nav></header><div id="online-auth-anchor"></div><section class="card"><div class="kicker">SHARING</div><h1 class="title">共有設定</h1><p class="intro">選んだ人に、自分の天気を共有しよう！</p><div class="privacy"><span>共有相手に見えるのは天気だけ。メモは共有されません。</span></div><div class="people" id="people"><div class="person"><div class="avatar">さ</div><div class="details"><strong>さくら</strong><small>sakura@example.com</small></div><label class="scope">見せる期間<select><option value="from_today">今日から</option><option value="past_7_days">過去7日</option><option value="past_30_days" selected>過去30日</option><option value="all_past">すべての過去</option></select></label><button class="remove" aria-label="さくらとの共有を解除">×</button></div><div class="person"><div class="avatar">た</div><div class="details"><strong>たくみ</strong><small>takumi@example.com</small></div><label class="scope">見せる期間<select><option value="from_today">今日から</option><option value="past_7_days">過去7日</option><option value="past_30_days">過去30日</option><option value="all_past" selected>すべての過去</option></select></label><button class="remove" aria-label="たくみとの共有を解除">×</button></div></div><button class="invite" id="invite">＋　共有する人を追加</button><p class="help">「今日から」は共有を設定した日以降の記録が対象です。共有はいつでも解除できます。</p></section></main><div class="toast" id="toast"></div><div class="modal-bg" id="modal"><div class="modal"><h2>共有する人を追加</h2><p>招待した相手が見られる期間を選べます。「今日から」は共有を設定した日以降が対象です。</p><input id="email" type="email" placeholder="メールアドレス"><div class="actions"><button id="cancel">キャンセル</button><button class="primary" id="send">招待する</button></div></div></div><script>
-const toast=s=>{let t=document.getElementById("toast");t.textContent=s;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2100)};document.querySelectorAll(".remove").forEach(b=>b.onclick=()=>{b.closest(".person").remove();toast("共有を解除しました")});const modal=document.getElementById("modal");document.getElementById("invite").onclick=()=>modal.classList.add("show");document.getElementById("cancel").onclick=()=>modal.classList.remove("show");document.getElementById("send").onclick=()=>{let input=document.getElementById("email"),email=input.value.trim();if(!email||!email.includes("@")){input.focus();return}let person=document.createElement("div");person.className="person";person.innerHTML='<div class="avatar"></div><div class="details"><strong></strong><small></small></div><label class="scope">見せる期間<select><option value="from_today">今日から</option><option value="past_7_days">過去7日</option><option value="past_30_days" selected>過去30日</option><option value="all_past">すべての過去</option></select></label><button class="remove" aria-label="共有を解除">×</button>';person.querySelector(".avatar").textContent=email.slice(0,1).toUpperCase();person.querySelector("strong").textContent=email.split("@")[0];person.querySelector("small").textContent=email;person.querySelector(".remove").onclick=()=>{person.remove();toast("共有を解除しました")};document.getElementById("people").appendChild(person);input.value="";modal.classList.remove("show");toast("招待を作成しました")};
-</script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script><script src="supabase-online.js"></script><script src="supabase-share.js"></script></body></html>
-<script>document.addEventListener('DOMContentLoaded',()=>{const note=document.querySelector('.privacy span');if(note)note.textContent='共有相手に見えるのは天気だけ。メモは共有されません。';});</script>
+</head>
+<body>
+<main class="app">
+  <header class="top">
+    <a class="brand" href="index.html">こころ天気</a>
+    <nav class="nav" aria-label="メインメニュー">
+      <a href="mood-weather-sharing.html">今日の記録</a>
+      <a href="mood-weather-history.html">過去の記録</a>
+      <a class="active" href="mood-weather-share.html">みんなの天気</a>
+      <a href="mood-weather-guide.html">使い方</a>
+    </nav>
+  </header>
+  <div class="dashboard">
+    <section class="card weekly-card" aria-labelledby="week-title">
+      <div class="kicker">THIS WEEK</div>
+      <h1 class="title" id="week-title">みんなの天気</h1>
+      <div class="week-summary"><div class="week-controls"><button id="previous-week" type="button">← 前の7日間</button><button id="latest-week" type="button" hidden>最新へ</button><strong id="week-range"></strong></div><span>表示されるのは天気だけ。メモは見えないハリよ。</span></div>
+      <div class="week-scroll"><div class="week-table" id="week-table" aria-live="polite"></div></div>
+      <p class="week-legend">午前と午後に記録した日は、アイコンを並べて表示します。</p>
+    </section>
+
+    <section class="card settings-card" aria-labelledby="settings-title">
+      <div class="kicker">SHARING</div>
+      <h2 class="settings-title" id="settings-title">共有設定</h2>
+      <div class="privacy">共有する友達は、いつでも編集できるハリ。</div>
+      <div class="people" id="people">
+        <div class="person"><div class="avatar">さ</div><div class="details"><strong>さくら</strong><small>sakura@example.com</small></div><button class="remove" aria-label="さくらとの共有を解除">×</button></div>
+        <div class="person"><div class="avatar">た</div><div class="details"><strong>たくみ</strong><small>takumi@example.com</small></div><button class="remove" aria-label="たくみとの共有を解除">×</button></div>
+      </div>
+      <button class="invite" id="invite" type="button">＋　共有する人を追加</button>
+      <p class="help">ここは画面の見本です。共有相手の追加や削除は、このブラウザーだけに保存されます。</p>
+    </section>
+  </div>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="modal-bg" id="modal" role="dialog" aria-modal="true" aria-labelledby="invite-title">
+  <div class="modal"><h2 id="invite-title">共有する人を追加</h2><p>追加した相手は見本として一覧に表示されます。</p><input id="email" type="email" placeholder="メールアドレス" aria-label="メールアドレス"><div class="actions"><button id="cancel" type="button">キャンセル</button><button class="primary" id="send" type="button">追加する</button></div></div>
+</div>
+<script>
+(() => {
+  const labels={sunny:"快晴",partly:"晴れ",cloudy:"くもり",drizzle:"小雨",storm:"豪雨"};
+  const icons={sunny:"sunny.png",partly:"partly-cloudy.png",cloudy:"cloudy.png",drizzle:"rain.png",storm:"heavy-rain.png"};
+  const colors={sunny:"#2CC8E8",partly:"#22B9F4",cloudy:"#26BDF1",drizzle:"#1749B4",storm:"#064779"};
+  const weekdays=["日","月","火","水","木","金","土"];
+  const today=new Date();today.setHours(12,0,0,0);
+  const keyFor=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+  const dateLabel=d=>`${d.getMonth()+1}/${d.getDate()}（${weekdays[d.getDay()]}）`;
+  const table=document.getElementById("week-table");
+  let weekOffset=0;
+  let ownRecords={};try{ownRecords=JSON.parse(localStorage.getItem("kokoro-weather-records-v1")||"{}")||{}}catch(_){ownRecords={}}
+  const friends=[
+    {name:"さくら",initial:"さ",weather:["partly","sunny","cloudy",null,"drizzle","partly","sunny"]},
+    {name:"たくみ",initial:"た",weather:["cloudy","partly",null,"sunny","partly","cloudy","drizzle"]}
+  ];
+  function makePersonRow(person,isSelf,days){
+    const row=document.createElement("div");row.className="week-row";
+    const label=document.createElement("div");label.className="person-label";
+    const avatar=document.createElement("span");avatar.className="avatar"+(isSelf?" self":"");avatar.textContent=person.initial;
+    const name=document.createElement("span");name.className="person-name";const strong=document.createElement("strong");strong.textContent=person.name;const small=document.createElement("small");small.textContent=isSelf?"あなた":"共有相手";name.append(strong,small);label.append(avatar,name);row.appendChild(label);
+    days.forEach((day,i)=>{
+      const isToday=keyFor(day)===keyFor(today);const cell=document.createElement("div");cell.className="weather-cell"+(isToday?" today":"");
+      const record=isSelf?ownRecords[keyFor(day)]:null;
+      const friendIndex=Math.round((day-today)/86400000)+6;
+      const values=isSelf?(record?.mode==="parts"?[record.morning,record.afternoon].filter(Boolean):[record?.weather].filter(Boolean)):[person.weather[friendIndex]].filter(Boolean);
+      if(!values.length){cell.classList.add("empty");cell.textContent="—"}
+      else if(values.length>1){cell.style.background=`linear-gradient(110deg,${colors[values[0]]||colors.cloudy} 0 50%,${colors[values[1]]||colors.cloudy} 50% 100%)`;const wrap=document.createElement("span");wrap.className="weather-parts";values.forEach(id=>{const img=document.createElement("img");img.src=`assets/weather/${icons[id]||icons.cloudy}`;img.alt=labels[id]||"天気";wrap.appendChild(img)});cell.appendChild(wrap)}
+      else{const id=values[0],img=document.createElement("img");cell.classList.add(`weather-${id}`);img.src=`assets/weather/${icons[id]||icons.cloudy}`;img.alt=labels[id]||"天気";cell.title=labels[id]||"天気";cell.appendChild(img)}
+      row.appendChild(cell);
+    });
+    table.appendChild(row);
+  }
+  function renderWeek(){
+    const start=new Date(today);start.setDate(today.getDate()-6+weekOffset*7);
+    const days=Array.from({length:7},(_,i)=>{const d=new Date(start);d.setDate(start.getDate()+i);return d;});
+    document.getElementById("week-range").textContent=`${dateLabel(days[0])} 〜 ${dateLabel(days[6])}`;
+    document.getElementById("latest-week").hidden=weekOffset===0;
+    table.replaceChildren();
+    const header=document.createElement("div");header.className="week-head";
+    const blank=document.createElement("div");header.appendChild(blank);
+    days.forEach(day=>{const label=document.createElement("div"),isToday=keyFor(day)===keyFor(today);label.className="day-label"+(isToday?" today":"");label.innerHTML=`<span>${dateLabel(day)}</span><span>${isToday?"今日":"\u00a0"}</span>`;header.appendChild(label)});
+    table.appendChild(header);
+    makePersonRow({name:"自分",initial:"自"},true,days);friends.forEach(friend=>makePersonRow(friend,false,days));
+  }
+  document.getElementById("previous-week").addEventListener("click",()=>{weekOffset--;renderWeek()});
+  document.getElementById("latest-week").addEventListener("click",()=>{weekOffset=0;renderWeek()});
+  renderWeek();
+
+  const toastNode=document.getElementById("toast");let toastTimer;
+  const toast=message=>{toastNode.textContent=message;toastNode.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>toastNode.classList.remove("show"),2200)};
+  const modal=document.getElementById("modal"),email=document.getElementById("email");
+  document.querySelectorAll(".remove").forEach(button=>button.addEventListener("click",()=>{button.closest(".person").remove();toast("見本から共有相手を削除しました")}));
+  document.getElementById("invite").addEventListener("click",()=>{modal.classList.add("show");email.focus()});
+  document.getElementById("cancel").addEventListener("click",()=>modal.classList.remove("show"));
+  document.getElementById("send").addEventListener("click",()=>{
+    const value=email.value.trim();if(!value||!email.validity.valid){email.focus();return}
+    const person=document.createElement("div");person.className="person";
+    const avatar=document.createElement("div");avatar.className="avatar";avatar.textContent=value.slice(0,1).toUpperCase();
+    const details=document.createElement("div");details.className="details";const strong=document.createElement("strong");strong.textContent=value.split("@")[0];const small=document.createElement("small");small.textContent=value;details.append(strong,small);
+    
+    const remove=document.createElement("button");remove.className="remove";remove.type="button";remove.setAttribute("aria-label","共有を解除");remove.textContent="×";remove.addEventListener("click",()=>{person.remove();toast("見本から共有相手を削除しました")});person.append(avatar,details,remove);document.getElementById("people").appendChild(person);email.value="";modal.classList.remove("show");toast("見本に共有相手を追加しました");
+  });
+  modal.addEventListener("click",event=>{if(event.target===modal)modal.classList.remove("show")});
+})();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script><script src="supabase-online.js"></script></body>
+</html>
