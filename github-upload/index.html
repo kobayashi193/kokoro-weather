@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>こころ天気</title>
+<style>
+:root{--ink:#172E4B;--muted:#7C8794;--page:#F2F3F5;--line:#E8EAED;--cyan:#29C3DC;--yellow:#FFE45B;--soft:#F5F6F7}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;font-size:14px;line-height:1.7}
+.app{max-width:960px;margin:0 auto;padding:32px 24px 56px}
+.top{display:flex;justify-content:flex-end;align-items:center;margin-bottom:30px}
+.nav{display:flex;gap:8px;align-items:center}
+.nav a{color:var(--muted);text-decoration:none;padding:8px 13px;border-radius:9px;font-size:13px;font-weight:700}
+.nav a:hover{background:#fff;color:var(--ink)}
+.hero{text-align:center;padding:18px 20px 18px}
+.title{font-size:36px;line-height:1.3;letter-spacing:.08em;font-weight:900;margin:0 0 8px}
+#page-title{-webkit-text-stroke:.65px currentColor}
+.tagline{display:inline-block;margin:0;padding:5px 15px;border-radius:999px;background:#FFE45B;color:#172E4B;font-size:15px;font-weight:800}
+.mascot-stage{position:relative;width:min(620px,100%);height:360px;margin:9px auto 0}
+.mascot{position:absolute;z-index:1;left:50%;bottom:0;transform:translateX(-50%);display:block;width:min(300px,68vw);height:auto}
+.weather-sprinkle{position:absolute;display:grid;place-items:center;width:68px;height:68px}
+.weather-sprinkle img{display:block;width:100%;height:100%;object-fit:contain}
+.weather-sprinkle.sunny{left:50%;top:5%;transform:translateX(-50%)}
+.weather-sprinkle.partly{left:6%;top:32%;transform:rotate(6deg)}
+.weather-sprinkle.cloudy{right:6%;top:32%;transform:rotate(-5deg)}
+.weather-sprinkle.rain{left:13%;bottom:1%;transform:rotate(7deg)}
+.weather-sprinkle.heavy-rain{right:13%;bottom:1%;transform:rotate(-4deg)}
+.links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;max-width:790px;margin:0 auto}
+.link-card{display:block;min-height:128px;padding:20px 20px 17px;background:#fff;border:1px solid #E6E9EC;border-radius:13px;color:inherit;text-decoration:none;transition:transform .15s,border-color .15s}
+.link-card:nth-child(1){background:#2CC8E8;border-color:#2CC8E8}
+.link-card:nth-child(2){background:#22B9F4;border-color:#22B9F4}
+.link-card:nth-child(3){background:#1749B4;border-color:#1749B4;color:#fff}
+.link-card:hover{transform:translateY(-2px);filter:brightness(1.04)}
+.link-title{display:flex;align-items:center;gap:9px;margin:0 0 8px;font-size:16px;font-weight:900}
+.link-mark{display:grid;place-items:center;width:40px;height:40px;border-radius:13px;background:#fff;color:#258E9E;flex:none}
+.link-mark svg{width:25px;height:25px;overflow:visible}
+.link-card:nth-child(2) .link-mark{background:#fff;color:#B18C18}
+.link-card:nth-child(3) .link-mark{background:#fff;color:#1749B4}
+.link-card p{margin:0;color:#17324B;font-size:12px;font-weight:600}
+.link-card:nth-child(3) .link-title,.link-card:nth-child(3) p{color:#fff}
+.footer{text-align:center;margin-top:24px}
+.footer a{color:#7C8794;font-size:12px;font-weight:700;text-decoration:none}
+.footer a:hover{color:var(--ink)}
+@media(max-width:640px){.app{padding:20px 15px 36px}.top{justify-content:center;margin-bottom:16px}.nav{gap:2px}.nav a{padding:8px 9px;font-size:12px}.hero{padding:16px 8px 20px}.title{font-size:30px}.tagline{font-size:14px}.mascot-stage{height:250px;width:calc(100% + 52px);margin:8px -26px 0}.mascot{width:min(240px,68vw)}.weather-sprinkle{width:42px;height:42px}.weather-sprinkle.sunny{left:50%;top:5%;transform:translateX(-50%)}.weather-sprinkle.partly{left:2%;top:29%;transform:rotate(6deg)}.weather-sprinkle.cloudy{right:2%;top:29%;transform:rotate(-5deg)}.weather-sprinkle.rain{left:0;top:66%;transform:rotate(7deg)}.weather-sprinkle.heavy-rain{right:0;top:66%;transform:rotate(-4deg)}.links{grid-template-columns:1fr;gap:10px}.link-card{min-height:0;padding:16px 18px}}
+#page-title,.brand{font-family:"Hiragino Maru Gothic ProN","Hiragino Maru Gothic Pro","Yu Gothic",sans-serif;letter-spacing:.04em}</style>
+</head>
+<body>
+<main class="app">
+<header class="top"><nav class="nav" aria-label="メインメニュー"><a href="mood-weather-sharing.html">今日の記録</a><a href="mood-weather-history.html">過去の記録</a><a href="mood-weather-share.html">共有設定</a><a href="mood-weather-guide.html">使い方</a></nav></header>
+<section class="hero" aria-labelledby="page-title">
+<h1 class="title" id="page-title">こころ天気</h1>
+<p class="tagline">今日の気分を天気で残そう！</p>
+<div class="mascot-stage" aria-hidden="true">
+<span class="weather-sprinkle partly"><img src="weather-partly-cloudy.png" alt=""></span>
+<span class="weather-sprinkle sunny"><img src="weather-sunny.png" alt=""></span>
+<span class="weather-sprinkle cloudy"><img src="weather-cloudy.png" alt=""></span>
+<span class="weather-sprinkle heavy-rain"><img src="weather-heavy-rain.png" alt=""></span>
+<span class="weather-sprinkle rain"><img src="weather-rain.png" alt=""></span>
+<img class="mascot" src="weather-companion-saturated.png" alt="">
+</div>
+</section>
+<nav class="links" aria-label="アプリのページ">
+<a class="link-card" href="mood-weather-sharing.html"><h2 class="link-title"><span class="link-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><rect x="6.5" y="5.5" width="17" height="21" rx="3.5" fill="#fff" stroke="#258E9E" stroke-width="1.7"/><path d="M10.5 11h9M10.5 15h7" stroke="#258E9E" stroke-width="1.7" stroke-linecap="round"/><path d="m17 22 7.2-7.2 2.8 2.8-7.2 7.2-4 1.2L17 22Z" fill="#FFE45B" stroke="#B18C18" stroke-width="1.2" stroke-linejoin="round"/><path d="m17 22 2.8 2.8" stroke="#B18C18" stroke-width="1.2"/></svg></span>今日の記録</h2><p>今日のあなたは晴れ？くもり？</p></a>
+<a class="link-card" href="mood-weather-history.html"><h2 class="link-title"><span class="link-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><rect x="5.5" y="7" width="21" height="20" rx="4" fill="#fff" stroke="#6485A0" stroke-width="1.7"/><path d="M5.5 12h21M11 5.5v4M21 5.5v4" stroke="#6485A0" stroke-width="1.7" stroke-linecap="round"/><path d="M10 16.5h2v2h-2zM15 16.5h2v2h-2zM20 16.5h2v2h-2z" fill="#22B9F4"/><rect x="14.5" y="21" width="3" height="3" rx="1" fill="#FFE45B"/></svg></span>過去の記録</h2><p>これまでの心の天気を振り返る</p></a>
+<a class="link-card" href="mood-weather-share.html"><h2 class="link-title"><span class="link-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M10 16.5 21.7 10M10 16.5l11.7 6" stroke="#258E9E" stroke-width="2" stroke-linecap="round"/><circle cx="8" cy="17" r="4" fill="#fff" stroke="#258E9E" stroke-width="1.7"/><circle cx="23.5" cy="9" r="4" fill="#fff" stroke="#258E9E" stroke-width="1.7"/><circle cx="23.5" cy="23" r="4" fill="#fff" stroke="#258E9E" stroke-width="1.7"/><path d="M21.5 9c0-1.6 2.5-2.3 3-.7.5-1.6 3-.9 3 .7 0 1.2-1.6 2.2-3 3.1-1.4-.9-3-1.9-3-3.1Z" fill="#FFE45B" stroke="#B18C18" stroke-width=".7"/></svg></span>共有設定</h2><p>自分の天気を友達に共有しよう！</p></a>
+</nav>
+<footer class="footer"><a href="mood-weather-guide.html">使い方 →</a></footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>こころ天気 — 過去の記録</title>
+<style>
+:root{--ink:#172E4B;--muted:#7C8794;--page:#F2F3F5;--line:#E8EAED;--yellow:#FFE45B}*{box-sizing:border-box}body{margin:0;background:var(--page);color:var(--ink);font:14px/1.6 -apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif}.app{max-width:900px;margin:auto;padding:30px 22px 56px}.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}.brand{font-size:20px;font-weight:900;color:inherit;text-decoration:none}.nav{display:flex;gap:8px}.nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:9px;font-size:13px;font-weight:700}.nav a.active{background:#fff;color:var(--ink)}.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:24px}.kicker{font-size:11px;letter-spacing:.12em;color:#9AA2AA;font-weight:800}.title{font-size:27px;margin:5px 0 2px;font-weight:900}.intro{margin:0 0 18px;color:var(--muted);font-size:13px}.privacy{padding:12px 14px;background:#F5F6F7;border-radius:9px;color:#687587;font-size:12px;margin-bottom:18px}.list{display:grid;gap:12px}.entry{border:1px solid var(--line);border-radius:11px;padding:16px}.entry-head{display:flex;justify-content:space-between;gap:12px;margin-bottom:12px}.date{font-weight:800}.mode{font-size:11px;color:var(--muted);background:#F1F2F4;padding:4px 8px;border-radius:7px}.weather-row{display:flex;flex-wrap:wrap;gap:9px}.weather{padding:8px 12px;border-radius:9px;background:var(--weather-color);font-weight:800;font-size:12px}.weather.dark{color:#fff}.comment,.memo{margin:12px 0 0;color:#586575;font-size:13px}.note-list{display:grid;gap:8px;margin-top:12px}.note-item{padding:10px 12px;border-radius:8px;background:#F5F6F7;overflow-wrap:anywhere}.note-time{display:block;margin-bottom:3px;color:#8A949E;font-size:11px}.memo{white-space:pre-wrap}.empty{padding:42px 18px;text-align:center;color:var(--muted);background:#F8F9FA;border-radius:10px}.backup{margin-top:22px;padding:16px;border-radius:10px;background:#F5F6F7}.backup h2{margin:0 0 5px;font-size:15px}.backup p{margin:0;color:#687587;font-size:12px}.backup-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.backup-actions button{border:1px solid #D8DEE4;border-radius:8px;padding:9px 12px;background:#fff;color:#172E4B;font:inherit;font-size:12px;font-weight:700;cursor:pointer}.backup-actions button.primary{background:#FFE45B;border-color:#FFE45B}.backup-status{margin-top:9px!important;min-height:1.5em;color:#315E76!important}.back{display:inline-flex;margin-top:18px;padding:9px 14px;border-radius:9px;background:var(--yellow);color:var(--ink);text-decoration:none;font-weight:800;font-size:12px}@media(max-width:600px){.app{padding:20px 14px 40px}.card{padding:18px}.brand{font-size:18px}.nav a{padding:7px 8px;font-size:11px}.title{font-size:24px}.entry{padding:13px}}
+.brand{font-family:"Hiragino Maru Gothic ProN","Hiragino Maru Gothic Pro","Yu Gothic",sans-serif;letter-spacing:.04em} .brand{-webkit-text-stroke:.65px currentColor}.nav a.active{background:#1749B4;color:#fff}.privacy{background:#DDF6FA;color:#315568}</style></head><body><main class="app"><header class="top"><a class="brand" href="index.html">こころ天気</a><nav class="nav"><a href="mood-weather-sharing.html">今日の記録</a><a class="active" href="mood-weather-history.html">過去の記録</a><a href="mood-weather-share.html">共有設定</a><a href="mood-weather-guide.html">使い方</a></nav></header><section class="card"><div class="kicker">MY WEATHER</div><h1 class="title">過去の記録</h1><p class="intro">これまでに記録した心の天気を見返せます。</p><div class="privacy">記録とメモは、このブラウザーに保存された自分のデータです。他の人には共有されません。</div><div class="list" id="list"></div><section class="backup" aria-labelledby="backup-title"><h2 id="backup-title">記録のバックアップ</h2><p>記録やメモをJSONファイルに保存できます。読み込むと、このブラウザーの記録に追加・統合します。ファイルにはメモも含まれるため、大切に保管してください。</p><div class="backup-actions"><button class="primary" id="export-backup" type="button">バックアップを保存</button><button id="choose-backup" type="button">バックアップを読み込む</button><input id="backup-file" type="file" accept=".json,application/json" hidden></div><p class="backup-status" id="backup-status" role="status" aria-live="polite"></p></section><a class="back" href="mood-weather-sharing.html">今日の記録へ</a></section></main>
+<script>
+const key="kokoro-weather-records-v1",labels={sunny:"快晴",partly:"晴れ",cloudy:"くもり",drizzle:"小雨",storm:"豪雨"},colors={sunny:"#2CC8E8",partly:"#22B9F4",cloudy:"#26BDF1",drizzle:"#1749B4",storm:"#064779"},days=["日","月","火","水","木","金","土"],list=document.getElementById("list");let records={};try{records=JSON.parse(localStorage.getItem(key)||"{}")}catch(e){}const keys=Object.keys(records).sort().reverse();if(!keys.length){list.innerHTML='<div class="empty">まだ記録がありません。今日の天気を記録すると、ここに並びます。</div>'}keys.forEach(function(k){const r=records[k],p=k.split("-"),d=new Date(Number(p[0]),Number(p[1])-1,Number(p[2]),12),entry=document.createElement("article");entry.className="entry";const head=document.createElement("div");head.className="entry-head";const date=document.createElement("time");date.className="date";date.textContent=p[0]+"年"+Number(p[1])+"月"+Number(p[2])+"日（"+days[d.getDay()]+"）";const mode=document.createElement("span");mode.className="mode";mode.textContent=r.mode==="parts"?"午前／午後":"1日通し";head.append(date,mode);entry.append(head);const row=document.createElement("div");row.className="weather-row";function add(id,part){if(!id)return;const b=document.createElement("span");b.className="weather"+(id==="drizzle"||id==="storm"?" dark":"");b.style.setProperty("--weather-color",colors[id]);b.textContent=(part?part+"　":"")+(labels[id]||id);row.appendChild(b)}if(r.mode==="parts"){add(r.morning,"午前");add(r.afternoon,"午後")}else add(r.weather,"");entry.appendChild(row);const notes=Array.isArray(r.entries)?r.entries:[{memo:r.memo||"",comment:r.comment||"",savedAt:r.savedAt||null}];const noteList=document.createElement("div");noteList.className="note-list";notes.forEach(function(note){if(!note.memo&&!note.comment)return;const item=document.createElement("div");item.className="note-item";if(note.savedAt){const time=document.createElement("time");time.className="note-time";const t=new Date(note.savedAt);time.textContent=t.toLocaleTimeString("ja-JP",{hour:"2-digit",minute:"2-digit"});item.appendChild(time)}if(note.comment){const c=document.createElement("p");c.className="comment";c.textContent="クモネズミ："+note.comment;item.appendChild(c)}if(note.memo){const m=document.createElement("div");m.className="memo";m.textContent=note.memo;item.appendChild(m)}noteList.appendChild(item)});if(noteList.childElementCount)entry.appendChild(noteList);list.appendChild(entry)});
+const backupStatus = document.getElementById("backup-status");
+const setBackupStatus = (message) => { backupStatus.textContent = message; };
+const weatherIds = new Set(Object.keys(labels));
+function isObject(value) { return value !== null && typeof value === "object" && !Array.isArray(value); }
+function validDateKey(value) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  const date = new Date(value + "T00:00:00Z");
+  return !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === value;
+}
+function validEntry(entry) {
+  return isObject(entry) && (entry.memo === undefined || typeof entry.memo === "string") &&
+    (entry.comment === undefined || typeof entry.comment === "string") &&
+    (entry.savedAt === undefined || entry.savedAt === null || (typeof entry.savedAt === "string" && !Number.isNaN(Date.parse(entry.savedAt))));
+}
+function validRecord(record) {
+  if (!isObject(record) || !["all", "parts"].includes(record.mode)) return false;
+  if (record.mode === "all" && !weatherIds.has(record.weather)) return false;
+  if (record.mode === "parts" && (!weatherIds.has(record.morning) || !weatherIds.has(record.afternoon))) return false;
+  if (record.memo !== undefined && typeof record.memo !== "string") return false;
+  if (record.comment !== undefined && typeof record.comment !== "string") return false;
+  if (record.entries !== undefined && (!Array.isArray(record.entries) || !record.entries.every(validEntry))) return false;
+  return true;
+}
+function recordEntries(record) {
+  if (Array.isArray(record.entries)) return record.entries;
+  return record.memo || record.comment ? [{memo:record.memo || "", comment:record.comment || "", savedAt:record.savedAt || null}] : [];
+}
+function recordTime(record) {
+  const times = [record.savedAt, ...recordEntries(record).map((entry) => entry.savedAt)]
+    .filter((value) => typeof value === "string").map(Date.parse).filter(Number.isFinite);
+  return times.length ? Math.max(...times) : 0;
+}
+function mergeRecords(current, incoming) {
+  const latest = recordTime(incoming) > recordTime(current) ? incoming : current;
+  const entries = [...recordEntries(current), ...recordEntries(incoming)];
+  const seen = new Set();
+  const uniqueEntries = entries.filter((entry) => {
+    const signature = JSON.stringify([entry.memo || "", entry.comment || "", entry.savedAt || null]);
+    if (seen.has(signature)) return false;
+    seen.add(signature);
+    return true;
+  }).sort((a, b) => (Date.parse(a.savedAt || "") || 0) - (Date.parse(b.savedAt || "") || 0));
+  const merged = {...current, ...incoming, ...latest, entries:uniqueEntries};
+  const mostRecentEntry = uniqueEntries[uniqueEntries.length - 1];
+  if (mostRecentEntry) {
+    merged.memo = mostRecentEntry.memo || "";
+    merged.comment = mostRecentEntry.comment || "";
+  }
+  return merged;
+}
+document.getElementById("export-backup").addEventListener("click", () => {
+  const backup = {app:"kokoro-weather", formatVersion:1, exportedAt:new Date().toISOString(), records};
+  const blob = new Blob([JSON.stringify(backup, null, 2)], {type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "kokoro-weather-backup-" + new Date().toLocaleDateString("sv-SE") + ".json";
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  setBackupStatus("バックアップを保存しました。ダウンロードしたファイルを大切に保管してください。");
+});
+const backupFile = document.getElementById("backup-file");
+document.getElementById("choose-backup").addEventListener("click", () => backupFile.click());
+backupFile.addEventListener("change", async () => {
+  const file = backupFile.files && backupFile.files[0];
+  if (!file) return;
+  try {
+    if (file.size > 5 * 1024 * 1024) throw new Error("ファイルが大きすぎます。5MB以下のバックアップを選んでください。");
+    const backup = JSON.parse(await file.text());
+    if (!isObject(backup) || backup.app !== "kokoro-weather" || backup.formatVersion !== 1 || !isObject(backup.records)) {
+      throw new Error("こころ天気のバックアップファイルではないようです。");
+    }
+    const incomingKeys = Object.keys(backup.records);
+    if (!incomingKeys.every((date) => validDateKey(date) && validRecord(backup.records[date]))) {
+      throw new Error("ファイル内の記録を読み取れませんでした。内容を確認してください。");
+    }
+    const merged = {...records};
+    let addedDays = 0;
+    incomingKeys.forEach((date) => {
+      if (merged[date]) merged[date] = mergeRecords(merged[date], backup.records[date]);
+      else { merged[date] = backup.records[date]; addedDays += 1; }
+    });
+    localStorage.setItem(key, JSON.stringify(merged));
+    records = merged;
+    setBackupStatus("読み込みました。新たに追加した日付は" + addedDays + "日分です。記録一覧を更新します。");
+    setTimeout(() => window.location.reload(), 900);
+  } catch (error) {
+    setBackupStatus(error.message || "読み込めませんでした。バックアップファイルを確認してください。");
+  } finally {
+    backupFile.value = "";
+  }
+});
+</script></body></html>
