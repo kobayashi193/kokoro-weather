@@ -23,6 +23,18 @@ let records = {};
 try {
   const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
   if (saved && typeof saved === "object" && !Array.isArray(saved)) records = saved;
+  let removedCharacterLines = false;
+  Object.values(records).forEach((record) => {
+    if (!record || typeof record !== "object") return;
+    if ("comment" in record || "commentVersion" in record) removedCharacterLines = true;
+    delete record.comment;
+    delete record.commentVersion;
+    if (Array.isArray(record.entries)) {
+      record.entries = record.entries.map(({memo = "", savedAt = null}) => ({memo, savedAt}));
+      removedCharacterLines = true;
+    }
+  });
+  if (removedCharacterLines) localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
 } catch (_) {
   toast("このブラウザでは保存データを読み込めませんでした。");
 }
@@ -187,7 +199,6 @@ function loadToday() {
     selectChoice("all", record.weather);
     updateCharacterLine(record.weather ? [record.weather] : []);
   }
-  if (record.comment && record.commentVersion === 2) characterLine.textContent = record.comment;
 }
 document.getElementById("save").addEventListener("click", () => {
   const mode = document.querySelector(".modes button.active")?.dataset.mode || "all";
@@ -205,13 +216,11 @@ document.getElementById("save").addEventListener("click", () => {
   }
   const previous = records[todayKey] || {};
   const entries = Array.isArray(previous.entries) ? previous.entries.slice() : [];
-  if (!Array.isArray(previous.entries) && (previous.memo || previous.comment)) {
-    entries.push({memo: previous.memo || "", comment: previous.comment || "", savedAt: previous.savedAt || null});
+  if (!Array.isArray(previous.entries) && previous.memo) {
+    entries.push({memo: previous.memo, savedAt: previous.savedAt || null});
   }
-  entries.push({memo, comment: characterLine.textContent, savedAt: new Date().toISOString()});
+  entries.push({memo, savedAt: new Date().toISOString()});
   record.entries = entries;
-  record.comment = characterLine.textContent;
-  record.commentVersion = 2;
   record.savedAt = new Date().toISOString();
   records[todayKey] = record;
   try {
