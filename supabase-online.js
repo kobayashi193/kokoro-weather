@@ -5,8 +5,20 @@
   const authPanel = document.createElement("section");
   authPanel.className = "online-auth";
   authPanel.innerHTML = '<div class="online-auth-copy"><strong>記録をオンラインに保存</strong><span id="online-auth-status">ログインすると、ほかの端末からも記録を見られます。</span></div><form id="online-login"><label for="online-email">メールアドレス</label><input id="online-email" type="email" autocomplete="email" required placeholder="メールアドレス"><button type="submit">ログインリンクを送る</button></form><div id="online-user" hidden><span id="online-user-email"></span><button id="online-logout" type="button">ログアウト</button></div><p id="online-auth-message" role="status" aria-live="polite"></p>';
-  const header = document.querySelector(".top");
-  if (header) header.insertAdjacentElement("afterend", authPanel);
+  const layoutStyle = document.createElement("style");
+  layoutStyle.textContent = '.online-auth{display:flex;align-items:center;gap:18px;margin:32px 0 0;padding:13px 16px;border:1px solid #E5EAED;border-radius:11px;background:#fff}.online-auth.home-auth{max-width:790px;width:100%;margin:32px auto 0}.online-auth-copy{display:grid;gap:2px;min-width:180px}.online-auth-copy strong{font-size:12px}.online-auth-copy span,#online-auth-message{color:#7C8794;font-size:11px}.online-auth form{display:flex;align-items:center;gap:8px;margin:0}.online-auth label{color:#7C8794;font-size:11px}.online-auth input{width:210px;padding:9px 11px;border:1px solid #D8DEE4;border-radius:8px;font:inherit;font-size:12px}.online-auth button{border:0;border-radius:8px;padding:9px 13px;background:#FFE45B;color:#172E4B;font:inherit;font-size:12px;font-weight:800;cursor:pointer}#online-user{display:flex;align-items:center;gap:12px;margin-left:auto;font-size:12px}#online-auth-message{margin:0 0 0 auto}.online-auth [hidden]{display:none!important}.online-nav{justify-content:flex-end;margin:0 0 20px}@media(max-width:760px){.online-auth{align-items:flex-start;flex-direction:column;gap:8px}.online-auth form{flex-wrap:wrap}.online-auth input{width:min(240px,60vw)}#online-user,#online-auth-message{margin:0}.online-nav{justify-content:center;margin-bottom:16px}}';
+  document.head.appendChild(layoutStyle);
+  const app = document.querySelector("main.app");
+  if (app) {
+    if (app.querySelector(".hero")) {
+      authPanel.classList.add("home-auth");
+      const footer = app.querySelector(".footer");
+      if (footer) footer.insertAdjacentElement("beforebegin", authPanel);
+      else app.appendChild(authPanel);
+    } else {
+      app.appendChild(authPanel);
+    }
+  }
   const status = document.getElementById("online-auth-status");
   const login = document.getElementById("online-login");
   const signedIn = document.getElementById("online-user");
