@@ -98,7 +98,7 @@
     event.preventDefault();
     const email = document.getElementById("online-email").value.trim();
     setMessage("ログインリンクを送っています…");
-    const {error} = await client.auth.signInWithOtp({email, options:{emailRedirectTo:location.href.split("#")[0]}});
+    const {error} = await client.auth.signInWithOtp({email, options:{emailRedirectTo:"https://kobayashi193.github.io/kokoro-weather/"}});
     setMessage(error ? "メールを送れませんでした。メールアドレスとAuth設定を確認してください。" : "ログインリンクをメールに送りました。メールを開いてください。");
   });
   document.getElementById("online-logout")?.addEventListener("click", async () => {
